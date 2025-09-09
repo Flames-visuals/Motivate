@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Motivation Hub ✨</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #000; /* fallback */
+      color: #fff;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ---------- Fullscreen Background ---------- */
+    .bg-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: blur(20px) brightness(0.6);
+      z-index: 0;
+    }
+
+    /* ---------- Overlay Gradient ---------- */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6));
+      z-index: 0;
+    }
+
+    /* ---------- Header ---------- */
+    header {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: gold;
+      text-shadow: 0px 0px 15px rgba(255, 215, 0, 1);
+      z-index: 1;
+      animation: pulseGlow 3s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { text-shadow: 0px 0px 10px rgba(255,215,0,0.7); }
+      50% { text-shadow: 0px 0px 25px rgba(255,215,0,1); }
+    }
+
+    /* ---------- Cards ---------- */
+    .card {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 20px;
+      margin: 15px 0;
+      width: 90%;
+      max-width: 500px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      z-index: 1;
+      transition: 0.3s;
+      animation: floatCard 6s ease-in-out infinite;
+    }
+
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .card:hover {
+      box-shadow: 0px 8px 40px rgba(255, 215, 0, 0.7);
+    }
+
+    .quote {
+      font-size: 1.4rem;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    .challenge {
+      font-size: 1.1rem;
+      margin-top: 10px;
+    }
+
+    /* ---------- Button ---------- */
+    button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(90deg, #ffcc00, #ff6600);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+      z-index: 1;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0px 8px 30px rgba(255, 140, 0, 0.8);
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      position: absolute;
+      bottom: 15px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      z-index: 1;
+    }
+
+    /* ---------- Fade Animation ---------- */
+    .fade {
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Full Background Image -->
+  <img src="./2ij5MmwoIE0EiZiQutPl--0--4rfur.jpg" alt="Background" class="bg-img">
+  <div class="overlay"></div>
+
+  <!-- Header -->
+  <header>✨ Daily Motivation Hub</header>
+
+  <!-- Quote Section -->
+  <div class="card">
+    <p class="quote fade" id="quoteText">“Believe in yourself, every single day.”</p>
+  </div>
+
+  <!-- Challenge Section -->
+  <div class="card">
+    <h3>🌟 Daily Challenge</h3>
+    <p class="challenge fade" id="challengeText">Smile at 3 people today 😊</p>
+  </div>
+
+  <!-- Button -->
+  <button onclick="newInspiration()">Inspire Me Again ✨</button>
+
+  <!-- Footer -->
+  <footer>Made with ❤️ by Flames~Designs</footer>
+
+  <script>
+    const quotes = [
+      "“Push yourself, because no one else is going to do it for you.”",
+      "“Success doesn’t just find you. You have to go out and get it.”",
+      "“Great things never come from comfort zones.”",
+      "“Dream it. Wish it. Do it.”",
+      "“Don’t stop when you’re tired. Stop when you’re done.”",
+      "“Believe in yourself, every single day.”"
+    ];
+
+    const challenges = [
+      "Write down 3 things you’re grateful for 🙏",
+      "Compliment someone genuinely 💬",
+      "Take a 10-minute walk outside 🚶‍♂️",
+      "Drink 5 cups of water today 💧",
+      "Avoid your phone for 1 hour 📵",
+      "Encourage a friend who needs it 🤝"
+    ];
+
+    function newInspiration() {
+      const quoteEl = document.getElementById("quoteText");
+      const challengeEl = document.getElementById("challengeText");
+
+      const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      const randomChallenge = challenges[Math.floor(Math.random() * challenges.length)];
+
+      // Restart fade animation
+      quoteEl.classList.remove("fade");
+      challengeEl.classList.remove("fade");
+      void quoteEl.offsetWidth;
+      void challengeEl.offsetWidth;
+
+      // Update content
+      quoteEl.textContent = randomQuote;
+      challengeEl.textContent = randomChallenge;
+
+      // Re-apply fade animation
+      quoteEl.classList.add("fade");
+      challengeEl.classList.add("fade");
+    }
+  </script>
+</body>
+</html>
